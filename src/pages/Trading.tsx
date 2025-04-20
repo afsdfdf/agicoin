@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useTheme } from '../context/ThemeContext';
-import TradingView from '../components/trading/TradingView';
 import ChartView from '../components/trading/ChartView';
 
 const Container = styled.div`

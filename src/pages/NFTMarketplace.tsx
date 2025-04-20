@@ -220,8 +220,6 @@ const nftTiers: NFTTier[] = [
 ];
 
 const NFTMarketplace: React.FC = () => {
-  const [selectedNFT, setSelectedNFT] = useState<NFTTier | null>(null);
-
   const handlePurchase = async (nft: NFTTier) => {
     // 这里添加购买逻辑
     alert(`准备购买 ${nft.title}`);
@@ -239,7 +237,7 @@ const NFTMarketplace: React.FC = () => {
       <div style={styles.mainContent}>
         <div style={styles.nftGrid}>
           {nftTiers.map(nft => (
-            <div key={nft.id} style={styles.nftCard} onClick={() => setSelectedNFT(nft)}>
+            <div key={nft.id} style={styles.nftCard} onClick={() => handlePurchase(nft)}>
               <div style={styles.imageContainer}>
                 <img
                   src={nft.image}

@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { FaCoins, FaChartLine, FaUsers, FaCheckCircle } from 'react-icons/fa';
-import { IconBaseProps } from 'react-icons';
+import React, { useState } from 'react';
 
 const styles = {
   container: {
@@ -159,6 +157,13 @@ const styles = {
   selectedStrategyCard: {
     border: '2px solid #6e8efb',
     transform: 'translateY(-2px)'
+  },
+  iconContainer: {
+    width: '16px',
+    height: '16px',
+    display: 'inline-block',
+    marginRight: '8px',
+    color: '#6e8efb'
   }
 };
 
@@ -273,7 +278,7 @@ const AIPlatform: React.FC = () => {
 
         <div style={styles.section}>
           <h2 style={styles.sectionTitle}>
-            {React.createElement(FaChartLine as React.ComponentType<IconBaseProps>, { style: { color: '#6e8efb' } })}
+            <span style={styles.iconContainer}>📈</span>
             投资策略
           </h2>
           <div style={styles.strategyGrid}>
@@ -288,7 +293,7 @@ const AIPlatform: React.FC = () => {
               >
                 <div style={styles.strategyHeader}>
                   <div style={styles.strategyIcon}>
-                    {React.createElement(FaChartLine as React.ComponentType<IconBaseProps>)}
+                    📈
                   </div>
                   <h3 style={styles.strategyTitle}>{strategy.title}</h3>
                 </div>
@@ -316,7 +321,7 @@ const AIPlatform: React.FC = () => {
         {selectedStrategy && (
           <div style={styles.section}>
             <h2 style={styles.sectionTitle}>
-              {React.createElement(FaCoins as React.ComponentType<IconBaseProps>, { style: { color: '#6e8efb' } })}
+              <span style={styles.iconContainer}>💰</span>
               投资金额
             </h2>
             <div style={styles.strategyCard}>
