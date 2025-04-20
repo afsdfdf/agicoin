@@ -2,7 +2,7 @@
 declare global {
   interface Window {
     Telegram?: {
-      WebApp: {
+      WebApp?: {
         ready: () => void;
         close: () => void;
         expand: () => void;
@@ -79,59 +79,103 @@ declare global {
   }
 }
 
+// 检查 Telegram 环境
+export const isTelegramWebAppAvailable = (): boolean => {
+  try {
+    return typeof window !== 'undefined' && 
+           window.Telegram !== undefined && 
+           window.Telegram.WebApp !== undefined;
+  } catch (error) {
+    console.error('Error checking Telegram WebApp availability:', error);
+    return false;
+  }
+};
+
 // 初始化 Telegram Web App
 export const initTelegramWebApp = () => {
-  if (window.Telegram?.WebApp) {
-    window.Telegram.WebApp.ready();
-    return window.Telegram.WebApp;
+  try {
+    if (isTelegramWebAppAvailable()) {
+      window.Telegram!.WebApp!.ready();
+      return window.Telegram!.WebApp;
+    }
+  } catch (error) {
+    console.error('Error initializing Telegram WebApp:', error);
   }
   return null;
 };
 
 // 获取 Telegram 用户信息
 export const getTelegramUser = () => {
-  if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
-    return window.Telegram.WebApp.initDataUnsafe.user;
+  try {
+    if (isTelegramWebAppAvailable() && window.Telegram!.WebApp!.initDataUnsafe?.user) {
+      return window.Telegram!.WebApp!.initDataUnsafe.user;
+    }
+  } catch (error) {
+    console.error('Error getting Telegram user:', error);
   }
   return null;
 };
 
 // 获取 Telegram 主题参数
 export const getTelegramThemeParams = () => {
-  if (window.Telegram?.WebApp?.themeParams) {
-    return window.Telegram.WebApp.themeParams;
+  try {
+    if (isTelegramWebAppAvailable() && window.Telegram!.WebApp!.themeParams) {
+      return window.Telegram!.WebApp!.themeParams;
+    }
+  } catch (error) {
+    console.error('Error getting Telegram theme params:', error);
   }
   return null;
 };
 
 // 获取 Telegram 颜色方案
 export const getTelegramColorScheme = () => {
-  if (window.Telegram?.WebApp?.colorScheme) {
-    return window.Telegram.WebApp.colorScheme;
+  try {
+    if (isTelegramWebAppAvailable() && window.Telegram!.WebApp!.colorScheme) {
+      return window.Telegram!.WebApp!.colorScheme;
+    }
+  } catch (error) {
+    console.error('Error getting Telegram color scheme:', error);
   }
   return 'light';
 };
 
 // 显示 Telegram 弹窗
 export const showTelegramPopup = (params: any) => {
-  if (window.Telegram?.WebApp) {
-    window.Telegram.WebApp.showPopup(params);
+  try {
+    if (isTelegramWebAppAvailable()) {
+      window.Telegram!.WebApp!.showPopup(params);
+    }
+  } catch (error) {
+    console.error('Error showing Telegram popup:', error);
+    alert(params.message || 'Error');
   }
 };
 
 // 显示 Telegram 警告
 export const showTelegramAlert = (message: string) => {
-  if (window.Telegram?.WebApp) {
-    window.Telegram.WebApp.showAlert(message);
+  try {
+    if (isTelegramWebAppAvailable()) {
+      window.Telegram!.WebApp!.showAlert(message);
+    } else {
+      alert(message);
+    }
+  } catch (error) {
+    console.error('Error showing Telegram alert:', error);
+    alert(message);
   }
 };
 
 // 显示 Telegram 确认框
 export const showTelegramConfirm = (message: string): Promise<boolean> => {
-  if (window.Telegram?.WebApp) {
-    return window.Telegram.WebApp.showConfirm(message);
+  try {
+    if (isTelegramWebAppAvailable()) {
+      return window.Telegram!.WebApp!.showConfirm(message);
+    }
+  } catch (error) {
+    console.error('Error showing Telegram confirm:', error);
   }
-  return Promise.resolve(false);
+  return Promise.resolve(window.confirm(message));
 };
 
 // 关闭 Telegram Web App
