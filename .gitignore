@@ -8,7 +8,8 @@
 
 # production
 /build
-/dist
+/.next
+/out
 
 # misc
 .DS_Store
@@ -24,14 +25,22 @@ yarn-debug.log*
 yarn-error.log*
 
 # IDE
-.idea/
-.vscode/
+.idea
+.vscode
 *.swp
 *.swo
 
-# Next.js
-/.next/
-/out/
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Temporary files
+*.log
+*.tmp
+*.temp
+.cache
+dist
 
 # Vercel
 .vercel
